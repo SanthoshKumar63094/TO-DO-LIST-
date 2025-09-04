@@ -1,38 +1,78 @@
-.App {
+body {
+  background: #0f172a; /* dark blue */
+  color: #e5e7eb;      /* light text */
+}
+
+/* Card container */
+.container {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 16px;
+  background: #111827;         /* dark gray */
+  border: 1px solid #2a2f3a;   /* subtle border */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* simple shadow */
+}
+
+/* Heading */
+.heading {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 700;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Add form */
+.add-form { display: flex; gap: 8px; margin-bottom: 12px; }
+.add-input,
+.todo-input,
+.date-input {
+  flex: 1;
+  padding: 10px 12px;
+  background: #0b1220;
+  color: #e5e7eb;
+  border: 1px solid #2a2f3a;
+  border-radius: 8px;
+}
+.add-input:focus,
+.todo-input:focus,
+.date-input:focus {
+  border-color: #6366f1; /* purple */
+  outline: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Buttons */
+.add-button,
+.btn {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #3c3f70;
+  background: #2b2f55;
+  color: #e5e7eb;
+  cursor: pointer;
 }
+.add-button { background: #6366f1; border-color: #6366f1; }
+.btn-delete { background: #ef4444; border-color: #ef4444; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Todo item */
+.todo-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #0f1628;
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  margin: 8px 0;
 }
+.todo-text { flex: 1; text-align: left; }
+.todo-meta { margin-top: 4px; font-size: 12px; color: #94a3b8; }
+.due-small { color: #94a3b8; font-size: 12px; }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Simple responsive */
+@media (max-width: 640px) {
+  .add-form { flex-direction: column; }
+  .add-button, .date-input { width: 100%; }
+  .container { margin: 20px 12px; padding: 16px; }
 }
