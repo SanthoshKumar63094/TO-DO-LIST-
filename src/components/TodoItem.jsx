@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function TodoItem({ todo, deleteTodo, editTodo, saveTodo, now }) {
+function TodoItem({ todo, deleteTodo, editTodo, saveTodo, toggleComplete, now }) {
   const [newText, setNewText] = useState(todo.text);
 
   const handleKeyDown = (e) => {
@@ -17,7 +17,13 @@ function TodoItem({ todo, deleteTodo, editTodo, saveTodo, now }) {
     : "";
 
   return (
-    <div className="todo-item">
+    <div className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => toggleComplete(todo.id)}
+        className="todo-checkbox"
+      />
       {todo.isEditing ? (
         <>
           <input
@@ -40,7 +46,7 @@ function TodoItem({ todo, deleteTodo, editTodo, saveTodo, now }) {
               </div>
             )}
           </div>
-          <div className="todo-actions">
+          <div className="todo-actions" style={{display:'flex',gap:'5px'}}>
             <button className="btn btn-edit" onClick={() => editTodo(todo.id)}>
               Edit
             </button>

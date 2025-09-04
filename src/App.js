@@ -24,8 +24,15 @@ function App() {
 
   // Add a new todo (with dueAt ISO string from datetime-local)
   const addTodo = (text, dueAt) => {
-    const newTodo = { id: Date.now(), text, dueAt, isEditing: false };
+    const newTodo = { id: Date.now(), text, dueAt, isEditing: false, completed: false };
     setTodos([...todos, newTodo]);
+  };
+
+  // Toggle todo completion status
+  const toggleComplete = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
 
   // Delete a todo
@@ -53,15 +60,34 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="heading">📒 Todo Notepad</h1>
-      <AddTodo addTodo={addTodo} />
-      <TodoList
-        todos={todos}
-        deleteTodo={deleteTodo}
-        editTodo={editTodo}
-        saveTodo={saveTodo}
-        now={now}
-      />
+      <div className="App">
+        <h1>Todo List</h1>
+        <AddTodo addTodo={addTodo} />
+        <div className="todo-container">
+          <div className="todo-column">
+            <h2>Active Tasks</h2>
+            <TodoList 
+              todos={todos.filter(todo => !todo.completed)} 
+              deleteTodo={deleteTodo} 
+              editTodo={editTodo} 
+              saveTodo={saveTodo} 
+              toggleComplete={toggleComplete}
+              now={now} 
+            />
+          </div>
+          <div className="todo-column">
+            <h2>Completed</h2>
+            <TodoList 
+              todos={todos.filter(todo => todo.completed)} 
+              deleteTodo={deleteTodo} 
+              editTodo={editTodo} 
+              saveTodo={saveTodo} 
+              toggleComplete={toggleComplete}
+              now={now} 
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

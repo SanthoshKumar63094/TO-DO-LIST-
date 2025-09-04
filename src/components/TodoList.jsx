@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem.jsx";
 
-function TodoList({ todos, deleteTodo, editTodo, saveTodo, now }) {
+function TodoList({ todos, deleteTodo, editTodo, saveTodo, toggleComplete, now }) {
   return (
     <div>
       {todos.length === 0 ? (
@@ -16,6 +16,7 @@ function TodoList({ todos, deleteTodo, editTodo, saveTodo, now }) {
             deleteTodo={deleteTodo}
             editTodo={editTodo}
             saveTodo={saveTodo}
+            toggleComplete={toggleComplete}
             now={now}
           />
         ))
