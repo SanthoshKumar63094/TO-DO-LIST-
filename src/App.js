@@ -61,7 +61,7 @@ function App() {
   return (
     <div className="container">
       <div className="App">
-        <h1>Todo List</h1>
+        <h1> Todo List </h1>
         <AddTodo addTodo={addTodo} />
         <div className="todo-container">
           <div className="todo-column">

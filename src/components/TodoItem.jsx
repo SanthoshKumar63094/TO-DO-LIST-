@@ -23,9 +23,10 @@ function TodoItem({ todo, deleteTodo, editTodo, saveTodo, toggleComplete, now })
         checked={todo.completed}
         onChange={() => toggleComplete(todo.id)}
         className="todo-checkbox"
+        aria-label={todo.completed ? 'Mark as incomplete' : 'Mark as complete'}
       />
-      {todo.isEditing ? (
-        <>
+      <div className="todo-content">
+        {todo.isEditing ? (
           <input
             className="todo-input"
             type="text"
@@ -35,26 +36,36 @@ function TodoItem({ todo, deleteTodo, editTodo, saveTodo, toggleComplete, now })
             onKeyDown={handleKeyDown}
             onBlur={() => saveTodo(todo.id, newText.trim())}
           />
-        </>
-      ) : (
-        <>
-          <div className="todo-text">
-            <div>{todo.text}</div>
-            {hasDue && (
-              <div className="todo-meta">
-                <span className="due-small">Due: {dueLabel}</span>
-              </div>
-            )}
-          </div>
-          <div className="todo-actions" style={{display:'flex',gap:'5px'}}>
-            <button className="btn btn-edit" onClick={() => editTodo(todo.id)}>
-              Edit
-            </button>
-            <button className="btn btn-delete" onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
-          </div>
-        </>
+        ) : (
+          <>
+            <div className="todo-text">
+              {todo.text}
+              {hasDue && (
+                <div className="todo-meta">
+                  <span className="due-small">Due: {dueLabel}</span>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+      {!todo.isEditing && (
+        <div className="todo-actions">
+          <button 
+            className="btn btn-edit" 
+            onClick={() => editTodo(todo.id)}
+            aria-label="Edit todo"
+          >
+            Edit
+          </button>
+          <button 
+            className="btn btn-delete" 
+            onClick={() => deleteTodo(todo.id)}
+            aria-label="Delete todo"
+          >
+            Delete
+          </button>
+        </div>
       )}
     </div>
   );

@@ -5,94 +5,88 @@ body {
 
 /* Card container */
 .container {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
   padding: 16px;
-  background: #111827;         /* dark gray */
-  border: 1px solid #2a2f3a;   /* subtle border */
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); /* simple shadow */
+  background: #111827;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-/* Todo container */
-.todo-container {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.todo-column {
-  flex: 1;
-  background: #1a2035;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #2a2f3a;
-}
-
-.todo-column h2 {
-  margin-top: 0;
-  font-size: 1.2rem;
-  color: #a5b4fc;
-  border-bottom: 1px solid #2a2f3a;
-  padding: 0 0 8px 0;
-  margin: 0 0 15px 0;
-  text-align: center;
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    margin: 20px auto;
+    border-radius: 12px;
+    min-height: auto;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* Heading */
-h1 {
-  margin: 0 0 20px;
-  font-size: 28px;
+.heading {
+  margin: 0 0 12px;
+  font-size: 24px;
   font-weight: 700;
   text-align: center;
-  color: #e5e7eb;
-  padding: 0 15px;
 }
 
 /* Add form */
-.add-form { display: flex; gap: 8px; margin-bottom: 12px; }
+.add-form { 
+  display: flex; 
+  flex-direction: column;
+  gap: 8px; 
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .add-form {
+    flex-direction: row;
+  }
+}
 .add-input,
 .todo-input,
 .date-input {
-  flex: 1;
-  padding: 10px 12px;
-  background: #1e293b;  /* Slightly lighter than the default for better contrast */
+  width: 100%;
+  padding: 12px;
+  background: #1e293b;
   color: #e5e7eb;
-  border: 1px solid #3b82f6;  /* Blue border for better visibility */
+  border: 1px solid #334155;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
-/* Style the calendar icon in date input */
-.date-input::-webkit-calendar-picker-indicator {
-  filter: invert(1);  /* Make the calendar icon white */
-  cursor: pointer;
-  padding: 4px;
-  margin-left: 4px;
-  border-radius: 4px;
-  background-color: #3b82f6;  /* Blue background for the icon */
-}
-
-/* Style the date input when focused */
-.date-input:focus {
-  outline: none;
-  border-color: #60a5fa;  /* Lighter blue when focused */
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);  /* Subtle glow effect */
-  background-color: #1e293b;
-}
-
-/* Style the calendar dropdown */
-.date-input::-webkit-datetime-edit {
+h1 {
+  text-align: center;
+  width: 100%;
+  margin: 0 0 20px 0;
+  padding: 0;
   color: #e5e7eb;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.date-input::-webkit-datetime-edit-fields-wrapper {
-  padding: 2px;
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+}
+.date-input {
+  width: 100%;
+  min-width: auto;
 }
 
-.date-input::-webkit-datetime-edit-text {
-  color: #e5e7eb;
-  padding: 0 4px;
+@media (min-width: 480px) {
+  .date-input {
+    width: 160px;
+  }
 }
 .add-input:focus,
 .todo-input:focus,
@@ -111,8 +105,52 @@ h1 {
   color: #e5e7eb;
   cursor: pointer;
 }
-.add-button { background: #6366f1; border-color: #6366f1; }
-.btn-delete { background: #ef4444; border-color: #ef4444; }
+.add-button, .btn {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  width: 100%;
+}
+
+.add-button { 
+  background: #6366f1; 
+  border: 1px solid #6366f1;
+  color: white;
+}
+
+.add-button:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.btn-delete { 
+  background: #ef4444; 
+  border: 1px solid #ef4444;
+  color: white;
+}
+
+.btn-edit {
+  background: #3b82f6;
+  border: 1px solid #3b82f6;
+  color: white;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .add-button, .btn {
+    width: auto;
+    min-width: 80px;
+  }
+}
 
 /* Todo item */
 .todo-item {
@@ -120,11 +158,11 @@ h1 {
   align-items: flex-start;
   gap: 12px;
   padding: 12px;
-  background: #0b1220;
+  background: #0f1628;
   border: 1px solid #2a2f3a;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  transition: all 0.2s ease;
+  border-radius: 10px;
+  margin: 8px 0;
+  flex-wrap: wrap;
 }
 
 .todo-item.completed {
@@ -138,26 +176,38 @@ h1 {
   height: 18px;
   cursor: pointer;
   accent-color: #6366f1;
+  flex-shrink: 0;
 }
 
-.todo-checkbox:focus {
-  outline: 2px solid #a5b4fc;
-  outline-offset: 2px;
-}
-
-.todo-text {
+.todo-content {
   flex: 1;
-  max-width: 100%;      /* Don’t let it stretch out of parent */
-  overflow-wrap: break-word;  /* Break long words */
-  word-break: break-word;     /* Extra support for older browsers */
-  white-space: normal;        /* Allow wrapping (not one line only) */
+  min-width: 0;
+}
+
+@media (max-width: 479px) {
+  .todo-actions {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+  
+  .todo-item {
+    padding: 10px;
+  }
+}
+.todo-text {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal; 
 }
 
 .todo-meta {
-  margin-top: 4px;       /* Some space below text */
+  margin-top: 4px;  
   font-size: 0.9rem;
   color: gray;
 }
+
 .due-small { color: #94a3b8; font-size: 12px; }
 
 /* Simple responsive */
